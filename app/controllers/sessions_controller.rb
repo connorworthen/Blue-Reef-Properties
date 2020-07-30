@@ -7,15 +7,18 @@ class SessionsController < ApplicationController
     @user = User.find_by(name: params[:user][:name])
     if @user.try(:authenticate, params[:user][:password]) 
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to welcome_path
     else
       redirect_to login_path, :notice => "Invalid Login" 
     end
   end
 
-    def destroy
-      session.delete :user_id
-      redirect_to login_path
-    end
+  def destroy
+    session.delete :user_id
+    redirect_to login_path
+  end
+
+  def welcome
+  end
 
 end
