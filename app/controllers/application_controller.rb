@@ -1,19 +1,20 @@
 class ApplicationController < ActionController::Base
-  
-  before_action :authorized
-  helper_method :current_user
-  helper_method :logged_in?
-  
-  def current_user    
-    User.find_by(id: session[:user_id])  
-  end
+    protect_from_forgery with: :exception #csrf
+    helper_method :logged_in
+    helper_method :current_user
+    helper_method :require_login
 
-  def logged_in?   
-    !current_user.nil?  
-  end
+    def logged_in
+        if !session[:user_id]
+            redirect_to new_user_path
+        end
+    end
 
-  def authorized
-    redirect_to '/welcome' unless logged_in?
-  end
+    def current_user
+        User.find(session[:user_id])
+    end
 
+    def require_login
+      redirect_to login_path unless session.include? :user_id
+    end
 end
