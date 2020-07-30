@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get 'welcome', to: 'sessions#welcome'
   
-  
+  resources :listings
   
 end
