@@ -1,6 +1,6 @@
 <h1>New Listing</h1>
 
-<%= form_for(@listing, url: listings_new_path) do |f| %>
+<%= form_for @listing, :url => { :action => "create" } do |f| %>
 
 <%= f.label :address%>
 <%= f.text_field :address%>
