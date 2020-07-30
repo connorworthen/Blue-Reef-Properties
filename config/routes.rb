@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create' 
   delete '/logout', to: 'sessions#destroy'
   get 'welcome', to: 'sessions#welcome'
+  get 'listings/new', to: 'listings#new'
+  post 'listings/new', to: 'listings#create'
   
 end
